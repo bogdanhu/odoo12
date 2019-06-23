@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* pragma_invoice_pricelist
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-24 17:51+0000\n"
+"PO-Revision-Date: 2018-05-24 17:51+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pragma_invoice_pricelist
+#: model:ir.model,name:pragma_invoice_pricelist.model_account_invoice
+msgid "Invoice"
+msgstr "Rechnung"
+
+#. module: pragma_invoice_pricelist
+#: model:ir.model,name:pragma_invoice_pricelist.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Rechnungszeile"
+
+#. module: pragma_invoice_pricelist
+#: model:ir.model.fields,field_description:pragma_invoice_pricelist.field_account_invoice_ps_pricelist_id
+msgid "Pricelist"
+msgstr "Preisliste"
+
+#. module: pragma_invoice_pricelist
+#: code:addons/pragma_invoice_pricelist/models/invoice.py:64
+#, python-format
+msgid "The selected currency %s does not match the currency %s of the pricelist."
+msgstr "Die Währung %s entspricht nicht der Währung %s in der Preisliste."
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+
+        <record model="ir.module.category" id="module_category_helpan">
+            <field name="name">Helpan</field>
+        </record>
+
+        <record id="group_helpan_user" model="res.groups">
+            <field name="name">Utilizator</field>
+            <field name="category_id" ref="module_category_helpan"/>
+            <field name="implied_ids" eval="[(4,ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_helpan_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_helpan"/>
+            <field name="implied_ids" eval="[(4, ref('group_helpan_user'))]"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- purchase order -->
+
+        <record model="ir.ui.view" id="helpan_dosar_po_inherit_form">
+            <field name="name">helpan.dosar.purchase.order.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+			<field name="company_id" position="after">
+			<!--		<field name="dosar_id" options="{'limit': 10, 'no_create': 1, 'no_create_edit': 1}" />
+                    --><field name="team_id" options="{'limit': 10, 'no_create': 1, 'no_create_edit': 1}" />
+                </field>
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                    <field name="dosar_id" options="{'limit': 10, 'no_create': 1, 'no_create_edit': 1}" />
+                </xpath>
+                <xpath expr="//notebook/page/field[@name='order_line']/form/sheet/group/group/field[@name='price_unit']" position="after">
+                    <field name="dosar_id" options="{'limit': 10, 'no_create': 1, 'no_create_edit': 1}" />
+                </xpath>
+            </field>
+        </record>
+
+         <!-- sale order -->
+
+        <record model="ir.ui.view" id="helpan_dosar_so_inherit_form">
+            <field name="name">helpan.dosar.sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+			<field name="payment_term_id" position="after">
+			        <field name="dosar_id" options="{'limit': 10, 'no_create': 1, 'no_create_edit': 1}" attrs="{'invisible': [('team_id','!=',1)]}" />
+                </field>
+            </field>
+        </record>
+
+
+        <!-- stock.picking order -->
+
+<!--
+        <record model="ir.ui.view" id="helpan_dosar_stock_picking_inherit_form">
+            <field name="name">helpan.dosar.stock.picking.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+				 <xpath expr="//sheet/group/group/field[@name='partner_id']" position="after">
+                    <field name="team_id"/>
+                 </xpath>
+            </field>
+        </record>
+
+-->
+
+
+
+         <!-- account tax -->
+        <record model="ir.ui.view" id="helpan_dosar_account_inherit_form">
+            <field name="name">helpan.dosar.account.view_tax_form.inherit</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">
+				<xpath expr="//notebook/page/group/group/field[@name='refund_account_id']" position="after">
+                    <field name="swanTVAID" />
+                </xpath>
+            </field>
+        </record>
+        <!-- account account -->
+        <record model="ir.ui.view" id="helpan_dosar_account_account_inherit_form">
+            <field name="name">helpan.dosar.account.account_form.inherit</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+				<xpath expr="//sheet/group/group/field[@name='deprecated']" position="after">
+                    <field name="swanContID" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- crm team -->
+        <record model="ir.ui.view" id="helpan_dosar_crm_team_inherit_form">
+            <field name="name">helpan.dosar.crm_team_form.inherit</field>
+            <field name="model">crm.team</field>
+            <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+            <field name="arch" type="xml">
+				<xpath expr="//form/sheet/group/group/field[@name='company_id']" position="after">
+                    <field name="ContFacturi" />
+                </xpath>
+            </field>
+        </record>
+
+                <!-- res.partener
+        <record model="ir.ui.view" id="helpan_dosar_customer_sync_inherit_form">
+            <field name="name">helpan.dosar.customersync.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/*" position="before">
+                     <header>
+                         <button name="sincronizeazaEDA" type="object" string="Sincronizeaza EDA"
+                                 class="oe_highlight"
+                                 attrs="{'invisible':['|',('esteSincronizatEDA','=',True)]}"/>
+                     </header>
+                </xpath>
+            </field>
+        </record>
+-->
+        <!-- Nu am reusit sa ii dau de cap - trebuie sa afisez cursul EUR - RON -->
+         <!-- account.invoice base.view_partner_form la inherit_id-->
+        <record model="ir.ui.view" id="helpan_dosar_invoice_exchange_inherit_form">
+            <field name="name">helpan.dosar.exchange.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                      <field name="dosar_id" options="{'limit': 10, 'no_create': 1, 'no_create_edit': 1}" attrs="{'invisible': [('team_id','!=',1)]}" />
+                 </xpath>
+                 <xpath expr="//field[@name='user_id']" position="after">
+                     <field name="ExchangeRateEurRON"/>
+                     <field name="swanFacturaID"/>
+                     <field name="esteSincronizatEDA" string="Este Sincronizat?"/>
+                 </xpath>
+                <!--
+                <xpath expr="//field[@name='name']" position="after">
+                     <field name="esteSincronizatEDA"/>
+                 </xpath>
+                 -->
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="helpan_dosar_product_inherit_form">
+            <field name="name">helpan.dosar.product.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+                      <field name="dosar_id" options="{'limit': 10, 'no_create': 1, 'no_create_edit': 1}" attrs="{'invisible': [('team_id','!=',1)]}" />
+                 </xpath>
+                <!--
+                <xpath expr="//field[@name='name']" position="after">
+                     <field name="esteSincronizatEDA"/>
+                 </xpath>
+                 -->
+            </field>
+        </record>
+        <!--
+         options="{'no_create': True, 'no_open': True}" class="oe_inline" on_change="1" can_create="true"
+        can_write="true" modifiers="{'readonly': [['state', 'not in', ['draft']]], 'required': true}" -->
+    
+        <!-- account.invoice base.view_partner_form la inherit_id-->
+        <record model="ir.ui.view" id="helpan_dosar_invoice_sync_inherit_form">
+            <field name="name">helpan.dosar.invoicesync.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header/*" position="after">
+
+                         <button name="sincronizeazaEDA" type="object" string="Sincronizeaza EDA"
+                                 class="oe_highlight"
+                                 attrs="{'invisible':['|',('esteSincronizatEDA','=',True)]}"/>
+                    /> <!-- nu afisa
+                                 attrs="{'invisible':['|',('esteSincronizatEDA','=',True)]}" butonul daca e
+                                 partenerul este sincronizat -->
+
+                </xpath>
+            </field>
+        </record>
+
+
+
+
+
+
+        <record id="view_helpan_dosar_search" model="ir.ui.view">
+            <field name="name">helpan.dosar.search</field>
+            <field name="model">helpan.dosar</field>
+            <field name="arch" type="xml">
+                <search string="Helpan dosare">
+                    <field name="denumire_completa_dosar"/>
+                    <field name="name"/>
+                    <field name="internal_identify"/>
+                    <field name="date_created"/>
+                    <field name="initiator"/>
+                </search>
+            </field>
+        </record>
+        <record id="view_helpan_dosar_tree" model="ir.ui.view">
+            <field name="name">helpan.dosar.tree</field>
+            <field name="model">helpan.dosar</field>
+            <field name="arch" type="xml">
+                <tree string="Helpan dosare"  colors="red:shop!='platit';green:shop=='platit' ">
+                    <field name="denumire_completa_dosar"/>
+                    <field name="name"/>
+                    <field name="internal_identify"/>
+                    <field name="date_created"/>
+                    <field name="initiator"/>
+                    <field name="facturi_ids"/>
+                    <field name="facturat"/>
+                    <field name="platit"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_helpan_dosar_form" model="ir.ui.view">
+            <field name="name">helpan.dosar.form</field>
+            <field name="model">helpan.dosar</field>
+            <field name="arch" type="xml">
+                <form string="Helpan dosar">
+                     <header>
+                        <button name="do_toggle_done" type="object" string="Togggle Done" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <notebook>
+                        <page name="date_generale" string="Date Generale">
+                            <group colspan="4" col="4">
+                            <group colspan="2">
+                                <field name="name"/>
+                                <field name="internal_identify"/>
+                                <field name="facturat"/>
+                            </group>
+                            <group colspan="2">
+                                <field name="date_created"/>
+                                <field name="initiator"/>
+
+                                 <field name="ResponsabilTehnic" domain="[('job_id', '=', 2)]"  options="{'limit': 10, 'no_create': 1, 'no_create_edit': 1}"/>
+                            </group>
+
+                        </group>
+                        </page>
+                         <page name="facturi" string="Facturi Client">
+                             <field name="facturi_ids" options="{'limit': 100, 'no_create': 1, 'no_create_edit': 1}"/>
+                        </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                      <field name="message_follower_ids" widget="mail_followers"/>
+                      <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                    </form>
+
+            </field>
+        </record>
+
+         <record id="action_helpan_dosar" model="ir.actions.act_window">
+            <field name="name">Dosare</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">helpan.dosar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_helpan_dosar_search"/>
+        </record>
+
+        <menuitem action="action_helpan_dosar"
+            id="menu_helpan_dosar"
+            groups="group_helpan_user"
+        web_icon="helpan_dosar,static/description/helpan.png"/>
+        />
+<!-- res.partener parent="sale.sale_menu_root"
+        <record model="ir.ui.view" id="hr.view_employee_inherit_form">
+            <field name="name">hr.view_employee_form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='personal_information']" position="after">
+                        <page name="dosare" string="Dosare">
+                             <field name="dosare_ids" ref="view_helpan_dosar_tree_employee"  options="{'limit': 100, 'no_create': 1, 'no_create_edit': 1}"/>
+                            <field name="facturat"/>
+                        </page>
+                     <page name="facturi" string="Dosare">
+                             <field name="facturi_ids" options="{'limit': 100, 'no_create': 1, 'no_create_edit': 1}"/>
+                        </page
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr.view_employee_form_custom" model="ir.ui.view">
+            <field name="name">hr.employee.form.custom.form.inherited</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                  <xpath expr="//field[@name='work_email']" position="after">
+                       <field name="contActiveDirectory"/>
+                  </xpath>
+             </field>
+        </record>
+
+>-->
+    </data>
+</odoo>

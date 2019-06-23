@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="ir_cron_dosar_responsabil">
+            <field name="name">Responsabil schedule</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'helpan.dosar '" name="model"/>
+            <field eval="'trimiteMail '" name="function"/>
+            <field name="args" eval="" />
+        </record>
+    </data>
+</odoo>
+
+#TODO : nu a mers

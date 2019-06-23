@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- helpan dosar -->
+        <record id="view_helpan_dosar_search" model="ir.ui.view">
+            <field name="name">helpan.dosar.search</field>
+            <field name="model">helpan.dosar</field>
+            <field name="arch" type="xml">
+                <search string="Helpan dosare">
+                    <field name="name"/>
+                    <field name="internal_identify"/>
+                    <field name="date_created"/>
+                    <field name="initiator"/>
+                </search>
+            </field>
+        </record>
+        <record id="view_helpan_dosar_tree" model="ir.ui.view">
+            <field name="name">helpan.dosar.tree</field>
+            <field name="model">helpan.dosar</field>
+            <field name="arch" type="xml">
+                <tree string="Helpan dosare">
+                    <field name="name"/>
+                    <field name="internal_identify"/>
+                    <field name="date_created"/>
+                    <field name="initiator"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_helpan_dosar_form" model="ir.ui.view">
+            <field name="name">helpan.dosar.form</field>
+            <field name="model">helpan.dosar</field>
+            <field name="arch" type="xml">
+
+                 <data>
+                    <xpath expr="//header" position="inside">
+                        <button name="invoice_print_payments_specification"
+                                string="Print with statement"
+                                type="object"
+                                class="oe_highlight" groups="base.group_user"/>
+                    </xpath>
+                    <button name="%(account.action_account_invoice_payment)d" position="before">
+                        <button name="invoice_print_payments_specification"
+                                string="Print with statement"
+                                type="object"
+                                groups="base.group_user"/>
+                    </button>
+                </data>
+                <form string="Helpan dosar">
+                    <header>
+                        <button name="do_toggle_done" type="object" string="Togggle Done" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group colspan="4" col="4">
+                            <group colspan="2">
+                                <field name="name"/>
+                                <field name="internal_identify"/>
+                                <field name="date_created"/>
+                            </group>
+                            <group colspan="2">
+
+                                <field name="initiator"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    </form>
+            </field>
+        </record>
+        <record id="action_helpan_dosar" model="ir.actions.act_window">
+            <field name="name">Dosare</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">helpan.dosar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_helpan_dosar_search"/>
+        </record>
+        <menuitem action="action_helpan_dosar"
+            id="menu_helpan_dosar" parent="sales_team.menu_sales"
+            groups="group_helpan_user"/>
+    </data>
+</openerp>

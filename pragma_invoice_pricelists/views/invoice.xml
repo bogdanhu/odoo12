@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+#
+#    odoo extensions
+#
+#    © 2017-now Josef Kaser (<http://www.pragmasoft.de>).
+#
+#   See the LICENSE file in the toplevel directory for copyright
+#   and license details.
+#
+-->
+
+<odoo>
+    <data>
+        <record id="pragma_invoice_pricelists.invoice_form" model="ir.ui.view"><!-- aici apare modificare-->
+            <field name="name">odoo-apps.invoice_form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/group[1]/group[2]/field[@name='user_id']" position="after">
+                    <field name="ps_pricelist_id"/>
+                </xpath>
+                <!--
+                <xpath expr="/form/sheet/notebook/page[1]/field[@name='invoice_line_ids']/tree/field[@name='discount']"
+                       position="after">
+                    <field name="ps_discount"/>
+                </xpath>
+                -->
+                <!--
+                <xpath expr="/form/header/button[@name='action_invoice_open']" position="replace">
+                    <button name="action_invoice_open" type="object" states="draft" string="Validate"
+                            class="oe_highlight o_invoice_validate" groups="account.group_account_user"/>
+                </xpath>
+                -->
+            </field>
+        </record>
+    </data>
+</odoo>

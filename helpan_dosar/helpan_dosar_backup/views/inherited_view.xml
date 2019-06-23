@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- purchase order -->
+
+        <record model="ir.ui.view" id="helpan_dosar_po_inherit_form">
+            <field name="name">helpan.dosar.purchase.order.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+				<field name="company_id" position="after">
+					<field name="dosar_id" />
+                </field>
+                <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                    <field name="dosar_id" />
+                </xpath>
+                <xpath expr="//notebook/page/field[@name='order_line']/form/sheet/group/group/field[@name='price_unit']" position="after">
+                    <field name="dosar_id" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- account invoice -->
+        <record model="ir.ui.view" id="helpan_dosar_supplierinv_inherit_form">
+            <field name="name">helpan.dosar.supplierinv.form.inherit</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+				<field name="reference" position="after">
+					<field name="dosar_id" />
+                    <field name="exchange_rate" />
+                </field>
+                <xpath expr="//notebook/page/field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="after">
+                    <field name="dosar_id" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

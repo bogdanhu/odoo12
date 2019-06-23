@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_helpan_dosar_everyone,helpan.dosar.everyone,model_helpan_dosar,base.group_user,1,0,0,0
+access_helpan_dosar_user,helpan.dosar.user,model_helpan_dosar,group_helpan_user,1,0,0,0
+access_helpan_dosar_manager,helpan.dosar.manager,model_helpan_dosar,group_helpan_manager,1,1,1,0
